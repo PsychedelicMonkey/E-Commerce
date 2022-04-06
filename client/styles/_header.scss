@@ -1,11 +1,12 @@
 .navbar {
+  @include set-background(#fff);
   position: fixed;
   width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 22px 42px;
-  border-bottom: 2px solid #eee;
   box-shadow: 2px 3px 5px rgba($color: #000000, $alpha: 0.05);
+  z-index: 101;
 
   a {
     color: set-text-color(#fff);

@@ -1,11 +1,14 @@
 import React from 'react';
 import Header from './Header';
+import { AuthProvider } from '../context/AuthContext';
 
 const Layout = ({ children }) => {
   return (
     <>
-      <Header />
-      <main>{children}</main>
+      <AuthProvider>
+        <Header />
+        <main>{children}</main>
+      </AuthProvider>
     </>
   );
 };

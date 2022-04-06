@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+body {
+  @include set-background(#eee);
+}
+
 img {
   width: 100%;
 }
@@ -15,8 +19,9 @@ a {
 }
 
 .container {
-  margin: 22px auto auto;
   max-width: 1250px;
+  margin: auto;
+  padding-top: 100px;
 }
 
 @import 'header';
