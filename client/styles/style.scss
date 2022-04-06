@@ -1,0 +1,22 @@
+@import 'config';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  width: 100%;
+}
+
+a {
+  color: blue;
+}
+
+.container {
+  margin: 22px auto auto;
+  max-width: 1250px;
+}
+
+@import 'header';
