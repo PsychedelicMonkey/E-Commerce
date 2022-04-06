@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 
 import api from '../lib/apolloClient';
@@ -23,6 +24,8 @@ const Home = ({ products }) => {
               height={prod.images[0].formats.medium.height}
             />
             <h3>{prod.name}</h3>
+
+            <Link href={`/products/${prod.slug}`}>View</Link>
           </div>
         ))}
       </section>
