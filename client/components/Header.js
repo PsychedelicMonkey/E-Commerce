@@ -14,7 +14,7 @@ const Header = () => {
           <nav className="navbar">
             <Link href="/">Home</Link>
             <div>
-              <Link href="#">
+              <Link href="/cart">
                 <a>Cart ({items.length})</a>
               </Link>
               {user ? (

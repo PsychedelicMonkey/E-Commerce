@@ -28,6 +28,12 @@ export const CartProvider = ({ children }) => {
     updateCookie(newItems);
   };
 
+  const removeFromCart = (productId) => {
+    const newItems = items.filter((i) => i.id !== productId);
+    setItems(newItems);
+    updateCookie(newItems);
+  };
+
   const updateCookie = async (items) => {
     const res = await fetch('http://localhost:3000/api/cart/add', {
       method: 'POST',
@@ -36,8 +42,7 @@ export const CartProvider = ({ children }) => {
       },
       body: JSON.stringify({ items }),
     });
-    const data = await res.json();
-    console.log(data);
+    await res.json();
   };
 
   const loadCart = async () => {
@@ -54,7 +59,7 @@ export const CartProvider = ({ children }) => {
   }, []);
 
   return (
-    <CartContext.Provider value={{ items, addToCart }}>
+    <CartContext.Provider value={{ items, addToCart, removeFromCart }}>
       {children}
     </CartContext.Provider>
   );

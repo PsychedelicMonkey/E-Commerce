@@ -1,20 +1,41 @@
-button {
-  @include set-background(#111);
+$mainColor: #111;
+$redColor: #ff0000;
+
+button,
+.button {
+  @include set-background($mainColor);
+  display: inline-block;
   padding: 8px;
   font-size: 18px;
   text-transform: uppercase;
-  border: 2px solid #111;
+  text-decoration: none;
+  border: 2px solid $mainColor;
   cursor: pointer;
   transition: 0.2s ease all;
   border-radius: 15px;
 
   &:hover {
     background-color: transparent;
-    color: #111;
+    color: $mainColor;
   }
 
   &.full {
     width: 100%;
+  }
+
+  &.sm {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+
+  &.red {
+    @include set-background($redColor);
+    border-color: $redColor;
+
+    &:hover {
+      background-color: transparent;
+      color: $redColor;
+    }
   }
 
   &:disabled {
@@ -22,7 +43,7 @@ button {
     opacity: 0.2;
 
     &:hover {
-      @include set-background(#111);
+      @include set-background($mainColor);
     }
   }
 }
