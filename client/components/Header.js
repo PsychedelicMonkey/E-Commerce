@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
 import { AuthContext } from '../context/AuthContext';
+import { CartContext } from '../context/CartContext';
 
 const Header = () => {
   const { user, loading, logoutUser } = useContext(AuthContext);
+  const { items } = useContext(CartContext);
 
   return (
     <>
@@ -12,7 +14,9 @@ const Header = () => {
           <nav className="navbar">
             <Link href="/">Home</Link>
             <div>
-              <Link href="#">Cart</Link>
+              <Link href="#">
+                <a>Cart ({items.length})</a>
+              </Link>
               {user ? (
                 <a href="#" onClick={logoutUser}>
                   Log Out

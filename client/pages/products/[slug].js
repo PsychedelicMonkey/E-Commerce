@@ -4,10 +4,12 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
 import { addApolloState, initializeApollo } from '../../lib/apolloClient';
+import CartForm from '../../components/CartForm';
 
 const GET_PRODUCT = gql`
   query products($slug: String!) {
     products(where: { slug: $slug }) {
+      id
       name
       price
       description
@@ -27,20 +29,24 @@ const Product = () => {
   return (
     <>
       {product ? (
-        <section>
-          <Head>
-            <title>{product.name} - E-Commerce</title>
-          </Head>
+        <div className="container">
+          <section>
+            <Head>
+              <title>{product.name} - E-Commerce</title>
+            </Head>
 
-          <h1>{product.name}</h1>
-          <h4>${product.price}</h4>
+            <Image
+              src={`http://localhost:1337${product.images[0].formats.medium.url}`}
+              width={product.images[0].formats.medium.width}
+              height={product.images[0].formats.medium.height}
+            />
 
-          <Image
-            src={`http://localhost:1337${product.images[0].formats.medium.url}`}
-            width={product.images[0].formats.medium.width}
-            height={product.images[0].formats.medium.height}
-          />
-        </section>
+            <h1>{product.name}</h1>
+            <h4>${product.price}</h4>
+
+            <CartForm product={product} />
+          </section>
+        </div>
       ) : null}
     </>
   );

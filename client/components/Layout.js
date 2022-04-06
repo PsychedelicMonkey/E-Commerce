@@ -1,13 +1,16 @@
 import React from 'react';
 import Header from './Header';
 import { AuthProvider } from '../context/AuthContext';
+import { CartProvider } from '../context/CartContext';
 
 const Layout = ({ children }) => {
   return (
     <>
       <AuthProvider>
-        <Header />
-        <main>{children}</main>
+        <CartProvider>
+          <Header />
+          <main>{children}</main>
+        </CartProvider>
       </AuthProvider>
     </>
   );

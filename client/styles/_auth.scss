@@ -43,23 +43,6 @@
     }
   }
 
-  button {
-    @include set-background(#111);
-    width: 100%;
-    padding: 8px;
-    font-size: 18px;
-    text-transform: uppercase;
-    border: 2px solid #111;
-    cursor: pointer;
-    transition: 0.2s ease all;
-    border-radius: 15px;
-
-    &:hover {
-      background-color: transparent;
-      color: #111;
-    }
-  }
-
   .register-link {
     font-size: 18px;
   }

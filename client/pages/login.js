@@ -46,7 +46,9 @@ const Login = () => {
             />
           </div>
 
-          <button type="submit">Log In</button>
+          <button type="submit" className="full">
+            Log In
+          </button>
         </form>
 
         <span className="register-link">
