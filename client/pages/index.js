@@ -3,10 +3,26 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 
-import api from '../lib/apolloClient';
-import { gql } from '@apollo/client';
+import api, { addApolloState, initializeApollo } from '../lib/apolloClient';
+import { gql, useQuery } from '@apollo/client';
 
-const Home = ({ products }) => {
+const GET_PRODUCTS = gql`
+  query {
+    products {
+      id
+      slug
+      name
+      images {
+        formats
+      }
+    }
+  }
+`;
+
+const Home = () => {
+  const { data } = useQuery(GET_PRODUCTS);
+  const products = data ? data.products : null;
+
   return (
     <div className={styles.container}>
       <Head>
@@ -34,24 +50,15 @@ const Home = ({ products }) => {
 };
 
 export const getStaticProps = async () => {
-  const { data } = await api.query({
-    query: gql`
-      query {
-        products {
-          id
-          slug
-          name
-          images {
-            formats
-          }
-        }
-      }
-    `,
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: GET_PRODUCTS,
   });
 
-  return {
-    props: { products: data.products },
-  };
+  return addApolloState(apolloClient, {
+    props: {},
+  });
 };
 
 export default Home;

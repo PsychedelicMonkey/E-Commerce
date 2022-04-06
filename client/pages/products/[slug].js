@@ -1,10 +1,29 @@
 import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import { gql } from '@apollo/client';
-import apolloClient from '../../lib/apolloClient';
+import { useRouter } from 'next/router';
+import { gql, useQuery } from '@apollo/client';
+import { addApolloState, initializeApollo } from '../../lib/apolloClient';
 
-const Product = ({ product }) => {
+const GET_PRODUCT = gql`
+  query products($slug: String!) {
+    products(where: { slug: $slug }) {
+      name
+      price
+      description
+      images {
+        formats
+      }
+    }
+  }
+`;
+
+const Product = () => {
+  const router = useRouter();
+  const { slug } = router.query;
+  const { data } = useQuery(GET_PRODUCT, { variables: { slug } });
+  const product = data ? data.products[0] : null;
+
   return (
     <>
       {product ? (
@@ -29,29 +48,21 @@ const Product = ({ product }) => {
 
 export const getStaticProps = async (ctx) => {
   const { slug } = ctx.params;
+  const apolloClient = initializeApollo();
 
-  const { data } = await apolloClient.query({
-    query: gql`
-      query products($slug: String!) {
-        products(where: { slug: $slug }) {
-          name
-          price
-          description
-          images {
-            formats
-          }
-        }
-      }
-    `,
+  await apolloClient.query({
+    query: GET_PRODUCT,
     variables: { slug },
   });
 
-  return {
-    props: { product: data.products[0] },
-  };
+  return addApolloState(apolloClient, {
+    props: {},
+  });
 };
 
 export const getStaticPaths = async () => {
+  const apolloClient = initializeApollo();
+
   const { data } = await apolloClient.query({
     query: gql`
       query {
