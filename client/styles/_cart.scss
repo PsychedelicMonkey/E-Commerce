@@ -1,0 +1,57 @@
+.table-wrap {
+  @include set-background(#fff);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 12px;
+  box-shadow: 2px 3px 5px rgba($color: #000, $alpha: 0.1);
+
+  h1 {
+    margin: 8px 0 42px;
+    font-size: 32px;
+    text-transform: uppercase;
+  }
+
+  .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    margin: 22px 0;
+
+    tr:nth-child(even) {
+      @include set-background(#efefef);
+    }
+
+    td,
+    th {
+      font-size: 18px;
+      padding: 4px 10px;
+    }
+  }
+
+  .total {
+    text-align: right;
+    margin: 2px 12px 22px;
+    font-size: 22px;
+  }
+
+  #checkout-btn {
+    align-self: flex-end;
+  }
+}
+
+.empty-text {
+  text-align: center;
+
+  .empty {
+    margin: 8px 0px;
+    font-size: 32px;
+    text-transform: uppercase;
+  }
+
+  a {
+    display: inline-block;
+    font-size: 20px;
+    margin-top: 8px;
+  }
+}
