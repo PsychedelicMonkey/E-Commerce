@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
+import Markdown from 'markdown-to-jsx';
+
 import { addApolloState, initializeApollo } from '../../lib/apolloClient';
 import CartForm from '../../components/CartForm';
+import ProductSwiper from '../../components/product/ProductSwiper';
 
 const GET_PRODUCT = gql`
   query products($slug: String!) {
@@ -35,16 +37,24 @@ const Product = () => {
               <title>{product.name} - E-Commerce</title>
             </Head>
 
-            <Image
-              src={`http://localhost:1337${product.images[0].formats.medium.url}`}
-              width={product.images[0].formats.medium.width}
-              height={product.images[0].formats.medium.height}
-            />
+            <section className="product-head">
+              <ProductSwiper images={product.images} />
 
-            <h1>{product.name}</h1>
-            <h4>${product.price}</h4>
+              <div className="product-detail">
+                <h1>{product.name}</h1>
 
-            <CartForm product={product} />
+                <Markdown
+                  options={{ disableParsingRawHTML: true }}
+                  className="description"
+                >
+                  {product.description}
+                </Markdown>
+
+                <h4>${product.price}</h4>
+
+                <CartForm product={product} />
+              </div>
+            </section>
           </section>
         </div>
       ) : null}

@@ -2,6 +2,10 @@ import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../lib/apolloClient';
 import Layout from '../components/Layout';
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 import '../styles/style.scss';
 
 const MyApp = ({ Component, pageProps }) => {
