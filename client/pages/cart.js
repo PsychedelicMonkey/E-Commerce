@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
+import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
 import Link from 'next/link';
+import CheckoutButton from '../components/CheckoutButton';
 
 const Cart = () => {
+  const { user } = useContext(AuthContext);
   const { items, removeFromCart } = useContext(CartContext);
 
   const getTotal = () => {
@@ -62,11 +65,15 @@ const Cart = () => {
 
           <h3 className="total">Order total: ${getTotal()}</h3>
 
-          <Link href="#">
-            <a id="checkout-btn" className="button">
-              Proceed to checkout
-            </a>
-          </Link>
+          {user ? (
+            <CheckoutButton />
+          ) : (
+            <Link href="/login">
+              <a id="checkout-btn" className="button">
+                Log In to checkout
+              </a>
+            </Link>
+          )}
         </section>
       ) : (
         <div className="empty-text">

@@ -4,6 +4,7 @@ module.exports = ({ env }) => ({
   admin: {
     auth: {
       secret: env('ADMIN_JWT_SECRET', 'e129a24f030fe441b3b74da32cff73c0'),
+      stripeSecret: env('STRIPE_SECRET'),
     },
   },
 });
