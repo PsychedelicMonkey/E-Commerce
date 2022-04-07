@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { addApolloState, initializeApollo } from '../lib/apolloClient';
 import { gql, useQuery } from '@apollo/client';
+import ProductCard from '../components/product/ProductCard';
 
 const GET_PRODUCTS = gql`
   query {
@@ -31,18 +32,11 @@ const Home = () => {
       </Head>
 
       <section>
-        {products.map((prod) => (
-          <div key={prod.id}>
-            <Image
-              src={`http://localhost:1337${prod.images[0].formats.medium.url}`}
-              width={prod.images[0].formats.medium.width}
-              height={prod.images[0].formats.medium.height}
-            />
-            <h3>{prod.name}</h3>
-
-            <Link href={`/products/${prod.slug}`}>View</Link>
-          </div>
-        ))}
+        <div className="card-grid">
+          {products.map((prod) => (
+            <ProductCard key={prod.id} product={prod} />
+          ))}
+        </div>
       </section>
     </div>
   );

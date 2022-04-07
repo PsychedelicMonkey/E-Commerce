@@ -1,0 +1,38 @@
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  gap: 22px;
+
+  .card {
+    @include set-background(#fff);
+    box-shadow: 2px 3px 5px rgba($color: #000000, $alpha: 0.05);
+    text-decoration: none;
+    height: 100%;
+    padding: 10px;
+    transition: 0.2s ease all;
+
+    .card-img {
+      position: relative;
+      width: 100%;
+      height: 350px;
+
+      img {
+        transition: 0.2s ease all;
+      }
+    }
+
+    h3 {
+      margin: 10px 0 4px;
+      font-size: 24px;
+    }
+
+    &:hover {
+      box-shadow: 2px 3px 5px rgba($color: #000000, $alpha: 0.25);
+
+      > .card-img img {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
